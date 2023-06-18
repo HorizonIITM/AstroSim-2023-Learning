@@ -12,7 +12,7 @@ const ll M = pow(10, 14);                          //mass in kg
 pair <ll, ll> v = make_pair(0, 10);   //initial velocity (vx, vy)
 pair <ll, ll> r = make_pair(66.74, 0);     //initial position (x, y)
 
-const ll h = 0.001;
+const ll h = 0.001;                         //step size
 
 
 
@@ -54,7 +54,7 @@ int main(){
     ofstream file("2BodySystem.txt");
     file << r.first << ' ' << r.second << endl;
     
-    for(int i = 0; i < 50000; i++){
+    for(int i = 0; i < 50000; i++){                            // number of points
         RungeX(&r.first, &r.second, &v.first);
         RungeY(&r.first, &r.second, &v.second);
                
