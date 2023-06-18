@@ -29,10 +29,10 @@ void updatePosition(Body& body, double timeStep) {
 }
 
 int main() {
-    // Create two bodies
+    // Creating two bodies
     Body heavyBody, lightBody;
 
-    // Set the properties of the bodies
+    // Properties of the bodies
     heavyBody.mass = 1.0e6;
     heavyBody.x = 0.0;
     heavyBody.y = 0.0;
@@ -57,15 +57,15 @@ int main() {
         return 1;
     }
 
-    // Simulate the motion
+    // Simulating the motion
     for (double t = t_start; t <= t_end; t += timeStep) {
         // Update the acceleration of the light body due to the heavy body
         updateAcceleration(heavyBody, lightBody);
 
-        // Update the position of the light body
+        // Updating the position of the light body
         updatePosition(lightBody, timeStep);
 
-        // Output the positions of the light body
+        // Output
         outputFile << lightBody.x << "," << lightBody.y << std::endl;
     }
 
