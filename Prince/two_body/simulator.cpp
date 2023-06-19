@@ -26,6 +26,9 @@ void updateAcceleration(Body& heavyBody, Body& lightBody) {
 void updatePosition(Body& body, double timeStep) {
     body.x += body.vx * timeStep;
     body.y += body.vy * timeStep;
+    std::cout<<body.x<<"x";
+    std::cout<<body.y<<"y";
+
 }
 
 int main() {
@@ -40,10 +43,10 @@ int main() {
     heavyBody.vy = 0.0;
 
     lightBody.mass = 1.0;
-    lightBody.x = 100.0;
-    lightBody.y = 100.0;
+    lightBody.x = 1000.0;
+    lightBody.y = 1000.0;
     lightBody.vx = 0.0;
-    lightBody.vy = -10.0;
+    lightBody.vy = -60.0;
 
     // Simulation parameters
     double t_start = 0.0;
