@@ -1,0 +1,97 @@
+m1=input("Enter the mass of the lighter object:");
+m2=input("Enter the mass of the heavier object:");         
+G = 6.67430e-11;    % Gravitational constant
+dt = 0.01;          % Time step
+t_end = 10;         % Simulation end time
+
+% Initial conditions
+x1 = input("Enter the X coordinate of the lighter object:");             
+y1 = input("Enter the Y coordinate of the lighter object:");             
+vx1 = input("Enter the velocity along X of the lighter object:");          
+vy1 = input("Enter the velocity along Y of the lighter object:");            
+x2 = 0;             
+y2 = 0;             
+vx2 = 0;            
+vy2 = 0;            
+
+figure;
+ax = gca;
+axis equal;
+xlim([min(x1, x2) - 1, max(x1, x2) + 1]);
+ylim([min(y1, y2) - 1, max(y1, y2) + 1]);
+
+lighterObj = plot(x1, y1, 'ro', 'MarkerSize', 10);
+heavierObj = plot(x2, y2, 'bo', 'MarkerSize', 20);
+legend('Lighter Object', 'Heavier Object');
+title('Motion Simulation');
+
+% Simulation loop
+t = 0;
+while t <= t_end
+    % Calculate distance and gravitational force
+    r_squared = (x2 - x1)^2 + (y2 - y1)^2;
+    r = sqrt(r_squared);
+    F = G * (m1 * m2) / r_squared;
+
+    % Calculate accelerations
+    ax1 = F * (x2 - x1) / (m1 * r);
+    ay1 = F * (y2 - y1) / (m1 * r);
+    ax2 = F * (x1 - x2) / (m2 * r);
+    ay2 = F * (y1 - y2) / (m2 * r);
+
+    % Update velocities
+    k1x = ax1 * dt;
+    k1y = ay1 * dt;
+    k2x = (ax1 + k1x/2) * dt;
+    k2y = (ay1 + k1y/2) * dt;
+    k3x = (ax1 + k2x/2) * dt;
+    k3y = (ay1 + k2y/2) * dt;
+    k4x = (ax1 + k3x) * dt;
+    k4y = (ay1 + k3y) * dt;
+    vx1 = vx1 + (k1x + 2*k2x + 2*k3x + k4x)/6;
+    vy1 = vy1 + (k1y + 2*k2y + 2*k3y + k4y)/6;
+    
+    k1x = ax2 * dt;
+    k1y = ay2 * dt;
+    k2x = (ax2 + k1x/2) * dt;
+    k2y = (ay2 + k1y/2) * dt;
+    k3x = (ax2 + k2x/2) * dt;
+    k3y = (ay2 + k2y/2) * dt;
+    k4x = (ax2 + k3x) * dt;
+    k4y = (ay2 + k3y) * dt;
+    vx2 = vx2 + (k1x + 2*k2x + 2*k3x + k4x)/6;
+    vy2 = vy2 + (k1y + 2*k2y + 2*k3y + k4y)/6;
+
+    % Update positions
+    k1x = vx1 * dt;
+    k1y = vy1 * dt;
+    k2x = (vx1 + k1x/2) * dt;
+    k2y = (vy1 + k1y/2) * dt;
+    k3x = (vx1 + k2x/2) * dt;
+    k3y = (vy1 + k2y/2) * dt;
+    k4x = (vx1 + k3x) * dt;
+    k4y = (vy1 + k3y) * dt;
+    x1 = x1 + (k1x + 2*k2x + 2*k3x + k4x)/6;
+    y1 = y1 + (k1y + 2*k2y + 2*k3y + k4y)/6;
+    
+    k1x = vx2 * dt;
+    k1y = vy2 * dt;
+    k2x = (vx2 + k1x/2) * dt;
+    k2y = (vy2 + k1y/2) * dt;
+    k3x = (vx2 + k2x/2) * dt;
+    k3y = (vy2 + k2y/2) * dt;
+    k4x = (vx2 + k3x) * dt;
+    k4y = (vy2 + k3y) * dt;
+    x2 = x2 + (k1x + 2*k2x + 2*k3x + k4x)/6;
+    y2 = y2 + (k1y + 2*k2y + 2*k3y + k4y)/6;
+
+    % Update the positions in the plot
+    set(lighterObj, 'XData', x1, 'YData', y1);
+    set(heavierObj, 'XData', x2, 'YData', y2);
+
+    % Pause for a short duration to show the animation
+    pause(0.01);
+
+    % Increment time
+    t = t + dt;
+end
