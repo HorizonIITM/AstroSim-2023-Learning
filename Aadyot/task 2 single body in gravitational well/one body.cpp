@@ -123,19 +123,19 @@ class gravitational_solver{
         gravitational_solver(gravitational_system s, float step){
             this->step = step;
             current_system = s;
-            // x_solver = solver<differential_equations::x_deriv>(s.x, s.t, step, differential_equations::x_deriv(s));
-            // y_solver = solver<differential_equations::y_deriv>(s.y, s.t, step, differential_equations::y_deriv(s));
-            // px_solver = solver<differential_equations::px_deriv>(s.px, s.t, step, differential_equations::px_deriv(s));
-            // py_solver = solver<differential_equations::py_deriv>(s.py, s.t, step, differential_equations::py_deriv(s));
+            // x_solver = solver(s.x, s.t, step, differential_equations::x_deriv(s));
+            // y_solver = solver(s.y, s.t, step, differential_equations::y_deriv(s));
+            // px_solver = solver(s.px, s.t, step, differential_equations::px_deriv(s));
+            // py_solver = solver(s.py, s.t, step, differential_equations::py_deriv(s));
         }
 
         gravitational_system next_step_all_rk4(){
 
             // i want to avoid initialization here and i want to do it just once in the constructor
-            x_solver = solver<differential_equations::x_deriv>(current_system.x, current_system.t, step, differential_equations::x_deriv(current_system));
-            y_solver = solver<differential_equations::y_deriv>(current_system.y, current_system.t, step, differential_equations::y_deriv(current_system));
-            px_solver = solver<differential_equations::px_deriv>(current_system.px, current_system.t, step, differential_equations::px_deriv(current_system));
-            py_solver = solver<differential_equations::py_deriv>(current_system.py, current_system.t, step, differential_equations::py_deriv(current_system));
+            x_solver = solver(current_system.x, current_system.t, step, differential_equations::x_deriv(current_system));
+            y_solver = solver(current_system.y, current_system.t, step, differential_equations::y_deriv(current_system));
+            px_solver = solver(current_system.px, current_system.t, step, differential_equations::px_deriv(current_system));
+            py_solver = solver(current_system.py, current_system.t, step, differential_equations::py_deriv(current_system));
             
             current_system= current_system.update_pos_mom(
                 x_solver.next_step_rk4(),

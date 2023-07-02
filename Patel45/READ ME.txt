@@ -1,0 +1,15 @@
+Hey 
+These are the programs I wrote for the gravitational well simulation.
+
+AstroWork.cpp is the file which does the computations for our simulation.
+If you want to explore, just change the initial values while initializing 
+the class objects. And type in the file name in which you want to store data.
+
+This data can be simulated using the file simulator.py. Just run the file, and
+type the name of the textfile you want to simulate.
+This simulation is just the 2D projection of what data was feeded in.
+You can resize the window and change the limits of the axes if needed.
+Make sure you have the libraries installed already.  
+
+ucm4.txt stores the tragectory for Unifrom Circular Motion.
+pb1.txt stores the tragectory when the planet has escape velocity.
