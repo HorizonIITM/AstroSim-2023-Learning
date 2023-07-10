@@ -50,7 +50,7 @@ int main() {
     double x0 = 20.0; // Initial x position
     double y0 = 0.0; // Initial y position
     double px0 = 0.0; // Initial x momentum
-    double py0 = sqrt(double(1.5) * G * heavyMass / x0); // Initial y momentum
+    double py0 = sqrt(1 * G * heavyMass / x0); // Initial y momentum // Explanation at end
 
     GravitationalSystem system(heavyMass, lightMass, x0, y0, px0, py0);
     double x_dash, y_dash, px_dash, py_dash;
@@ -75,3 +75,10 @@ int main() {
     outfile.close();
     return 0;
 }
+
+/* Explanation for py0
+
+for circular orbit : v = orbital velocity : v = sqrt(GM/r)
+for parabolic : v = escape velocity : v = sqrt(2GM/r)
+for elliptical : Vo < v < Ve : v = sqrt(1.5GM/r)
+for hyperbolic : v > Ve : v = sqrt(3GM/r) */
